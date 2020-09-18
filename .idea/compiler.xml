@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="CompilerConfiguration">
+    <annotationProcessing>
+      <profile default="true" name="Default" enabled="true" />
+      <profile name="Maven default annotation processors profile" enabled="true">
+        <sourceOutputDir name="target/generated-sources/annotations" />
+        <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
+        <outputRelativeToContentRoot value="true" />
+        <module name="zeyigou_common" />
+        <module name="springSecurityDemo" />
+        <module name="zeyigou_sellgoods_interface" />
+        <module name="zeyigou_dao" />
+        <module name="zeyigou_sellgoods_service" />
+        <module name="zeyigou_shop_web" />
+        <module name="zeyigou_manager_web" />
+        <module name="fastDFSDemo" />
+        <module name="zeyigou_pojo" />
+      </profile>
+    </annotationProcessing>
+  </component>
+</project>

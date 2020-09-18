@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans:beans xmlns="http://www.springframework.org/schema/security"
+             xmlns:beans="http://www.springframework.org/schema/beans"
+             xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+             xsi:schemaLocation="http://www.springframework.org/schema/beans
+             http://www.springframework.org/schema/beans/spring-beans.xsd
+             http://www.springframework.org/schema/security
+             http://www.springframework.org/schema/security/spring-security.xsd">
+<!--    1.定义要放行的资源-->
+    <http pattern="/css/**" security="none"/>
+    <http pattern="/img/**" security="none"/>
+    <http pattern="/js/**" security="none"/>
+    <http pattern="/plugins/**" security="none"/>
+    <http pattern="/login.html" security="none"/>
+
+<!--    2.配置用户认证-->
+    <http use-expressions="false">
+<!--        2.1 定义一个角色(拥有所有资源）-->
+        <intercept-url pattern="/**" access="ROLE_ADMIN"/>
+<!--        2.2 定义登录表单-->
+        <form-login login-page="/login.html" default-target-url="/admin/index.html"
+                    authentication-failure-url="/login.html"
+                    always-use-default-target="true"/>
+<!--        2.3 配置csrf-->
+        <csrf disabled="true"/>
+<!--        2.4 启用框架-->
+        <headers>
+            <frame-options policy="SAMEORIGIN"/>
+        </headers>
+<!--        2.5 配置注销功能-->
+        <logout/>
+    </http>
+<!--    3. 配置认证管理器-->
+    <authentication-manager>
+        <authentication-provider>
+            <user-service>
+                <user name="zhangsan" password="123" authorities="ROLE_ADMIN"/>
+                <user name="lisi" password="456" authorities="ROLE_ADMIN"/>
+            </user-service>
+        </authentication-provider>
+    </authentication-manager>
+
+</beans:beans>

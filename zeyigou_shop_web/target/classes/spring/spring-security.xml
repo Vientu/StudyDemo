@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans:beans xmlns="http://www.springframework.org/schema/security"
+             xmlns:beans="http://www.springframework.org/schema/beans"
+             xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+             xmlns:dubbo="http://code.alibabatech.com/schema/dubbo"
+             xsi:schemaLocation="http://www.springframework.org/schema/beans
+             http://www.springframework.org/schema/beans/spring-beans.xsd
+             http://www.springframework.org/schema/security
+             http://www.springframework.org/schema/security/spring-security.xsd http://code.alibabatech.com/schema/dubbo http://code.alibabatech.com/schema/dubbo/dubbo.xsd">
+<!--    1.定义要放行的资源-->
+    <http pattern="/css/**" security="none"/>
+    <http pattern="/img/**" security="none"/>
+    <http pattern="/js/**" security="none"/>
+    <http pattern="/plugins/**" security="none"/>
+    <http pattern="/*.html" security="none"/>
+    <http pattern="/seller/add.do" security="none"/>
+
+<!--    2.配置用户认证-->
+    <http use-expressions="false">
+<!--        2.1 定义一个角色(拥有所有资源）-->
+        <intercept-url pattern="/**" access="ROLE_SELLER"/>
+<!--        2.2 定义登录表单-->
+        <form-login login-page="/shoplogin.html" default-target-url="/admin/index.html"
+                    authentication-failure-url="/shoplogin.html"
+                    always-use-default-target="true"/>
+<!--        2.3 配置csrf-->
+        <csrf disabled="true"/>
+<!--        2.4 启用框架-->
+        <headers>
+            <frame-options policy="SAMEORIGIN"/>
+        </headers>
+<!--        2.5 配置注销功能-->
+        <logout/>
+    </http>
+<!--    3.配置加密器-->
+    <beans:bean id="passwordEncoder" class="org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder"/>
+<!--    4. 配置认证管理器-->
+    <authentication-manager>
+<!--        4.1 引入userService-->
+        <authentication-provider user-service-ref="userService">
+<!--            4.2 引入加密器-->
+            <password-encoder ref="passwordEncoder"/>
+        </authentication-provider>
+    </authentication-manager>
+<!--    5.定义userService对象-->
+    <beans:bean id="userService" class="com.zeyigou.shop.service.UserServiceImpl">
+        <beans:property name="sellerService" ref="sellerService"/>
+    </beans:bean>
+
+    <!--6.配置从zookeeper注册中心中得到sellerService对象-->
+    <dubbo:application name="zeyigou_shop_web"/>
+    <dubbo:registry address="zookeeper://192.168.25.128:2181"/>
+    <dubbo:reference interface="com.zeyigou.sellgoods.service.SellerService" id="sellerService"/>
+</beans:beans>

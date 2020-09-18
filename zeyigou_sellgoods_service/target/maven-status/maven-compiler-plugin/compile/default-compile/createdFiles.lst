@@ -1,0 +1,9 @@
+com\zeyigou\sellgoods\service\impl\SpecificationServiceImpl.class
+com\zeyigou\sellgoods\service\impl\SpecificationOptionServiceImpl.class
+com\zeyigou\sellgoods\service\impl\GoodsServiceImpl.class
+com\zeyigou\sellgoods\service\impl\BrandServiceImpl.class
+com\zeyigou\sellgoods\service\impl\GoodsDescServiceImpl.class
+com\zeyigou\sellgoods\service\impl\ItemCatServiceImpl.class
+com\zeyigou\sellgoods\service\impl\SellerServiceImpl.class
+com\zeyigou\sellgoods\service\impl\TypeTemplateServiceImpl.class
+com\zeyigou\sellgoods\service\impl\ItemServiceImpl.class

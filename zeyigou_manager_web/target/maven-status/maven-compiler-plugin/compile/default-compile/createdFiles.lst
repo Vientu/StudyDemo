@@ -1,0 +1,10 @@
+com\zeyigou\manager\controller\SpecificationOptionController.class
+com\zeyigou\manager\controller\GoodsController.class
+com\zeyigou\manager\controller\GoodsDescController.class
+com\zeyigou\manager\controller\SpecificationController.class
+com\zeyigou\manager\controller\IndexController.class
+com\zeyigou\manager\controller\ItemCatController.class
+com\zeyigou\manager\controller\ItemController.class
+com\zeyigou\manager\controller\TypeTemplateController.class
+com\zeyigou\manager\controller\BrandController.class
+com\zeyigou\manager\controller\SellerController.class
