@@ -40,7 +40,7 @@
     
 </head>
 
-<body class="hold-transition skin-red sidebar-mini" ng-app="zeyigou" ng-controller="goodsController" ng-init="findByParentId(0)">
+<body class="hold-transition skin-red sidebar-mini" ng-app="zeyigou" ng-controller="goodsController" ng-init="findByParentId(0);findOne();">
 
             <!-- 正文区域 -->
             <section class="content">
@@ -66,7 +66,6 @@
                             </li>                       
                         </ul>
                         <!--tab头/-->
-						{{entity}}
                         <!--tab内容-->
                         <div class="tab-content">
 
@@ -127,21 +126,23 @@
 			                               <input type="text" class="form-control" ng-model="entity.goods.price" placeholder="价格" value="">
 		                           	   </div>
 		                           </div>
-		                           
+
 		                           <div class="col-md-2 title editer">商品介绍</div>
+
                                    <div class="col-md-10 data editer">
-                                       <textarea name="content" style="width:800px;height:400px;visibility:hidden;" ng-model="entity.goods.introduction"></textarea>
+                                       <textarea name="content" style="width:800px;height:400px;visibility:hidden;"
+												 ng-model="entity.goodsDesc.introduction"></textarea>
                                    </div>
 		                           
 		                           <div class="col-md-2 title rowHeight2x">包装列表</div>
 		                           <div class="col-md-10 data rowHeight2x">
 		                               
-		                           	<textarea rows="4"  class="form-control" ng-model="entity.goods.packageList"  placeholder="包装列表"></textarea>
+		                           	<textarea rows="4"  class="form-control" ng-model="entity.goodsDesc.packageList"  placeholder="包装列表"></textarea>
 		                           </div>
 		                           
 		                           <div class="col-md-2 title rowHeight2x">售后服务</div>
 		                           <div class="col-md-10 data rowHeight2x">
-		                               <textarea rows="4"  class="form-control"  ng-model="entity.goods.saleService"  placeholder="售后服务"></textarea>
+		                               <textarea rows="4"  class="form-control"  ng-model="entity.goodsDesc.saleService"  placeholder="售后服务"></textarea>
 		                           </div>                        
                                   
                                     
@@ -191,7 +192,8 @@
 		                                <div class="col-md-2 title">{{custom.text}}</div>
 				                        <div class="col-md-10 data">
 				                              <input class="form-control"
-													 ng-model="custom.value" placeholder="{{custom.text}}">
+													 ng-model="custom.value"
+													 placeholder="{{custom.text}}">
 				                        </div>
 	                                </div>
                                 </div>
@@ -217,7 +219,9 @@
 					                        <div class="col-md-10 data">
 					                               
 					                            <span ng-repeat="option in spec.options">
-					                            	<input  type="checkbox" ng-click="updateSpec($event,spec.text,option.optionName)">{{option.optionName}}
+					                            	<input  type="checkbox"
+															ng-checked="checkedAttribute(spec.text,option.optionName)"
+															ng-click="updateSpec($event,spec.text,option.optionName)">{{option.optionName}}
 					                            </span>  	
 
 					                        </div>

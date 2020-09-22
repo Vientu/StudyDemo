@@ -14,10 +14,26 @@
     <link rel="stylesheet" href="../css/style.css">
 	<script src="../plugins/jQuery/jquery-2.2.3.min.js"></script>
     <script src="../plugins/bootstrap/js/bootstrap.min.js"></script>
- 
+
+	<!--	1.引入angularjs-->
+	<script src="../plugins/angularjs/angular.min.js"></script>
+	<!--	2.引入分页插件的js库-->
+	<script src="../plugins/angularjs/pagination.js"></script>
+	<!--	3.引入base_pagination.js模块-->
+	<script src="../js/base_pagination.js"></script>
+	<!--	4.引入basePageController控制器-->
+	<script src="../js/controller/baseController.js"></script>
+	<!--	5.引入goodsService-->
+	<script src="../js/service/goodsService.js"></script>
+	<script src="../js/service/itemCatService.js"></script>
+	<script src="../js/service/typeTemplateService.js"></script>
+	<!--	6.引入goodsController控制器-->
+	<script src="../js/controller/goodsController.js"></script>
+
 </head>
 
-<body class="hold-transition skin-red sidebar-mini" >
+<body class="hold-transition skin-red sidebar-mini" ng-app="zeyigou" ng-controller="goodsController"
+	  ng-init="findAll();findCategoryList();">
   <!-- .box-body -->
                 
                     <div class="box-header with-border">
@@ -74,30 +90,21 @@
 			                          </tr>
 			                      </thead>
 			                      <tbody>
-			                          <tr>
+			                          <tr ng-repeat="goods in list">
 			                              <td><input  type="checkbox"></td>			                              
-				                          <td>1</td>
-									      <td>小米6S手机</td>
-									      <td>1090</td>
-									      <td>数码</td>
-									      <td>手机</td>
-									      <td>国产手机</td>
+				                          <td>{{goods.id}}</td>
+									      <td>{{goods.goodsName}}</td>
+									      <td>{{goods.price}}</td>
+									      <td>{{categoryList[goods.category1Id]}}</td>
+									      <td>{{categoryList[goods.category2Id]}}</td>
+									      <td>{{categoryList[goods.category3Id]}}</td>
 		                                  <td>
 		                                  	<span>
-		                                  		未申请
-		                                  	</span>
-		                                  	<span >
-		                                  		申请中
-		                                  	</span>
-		                                  	<span>
-		                                  		审核通过
-		                                  	</span>
-		                                  	<span>
-		                                  		已驳回
+		                                  		{{status[goods.auditStatus]}}
 		                                  	</span>
 		                                  </td>		                                  
 		                                  <td class="text-center">                                          
-		                                 	  <button type="button" class="btn bg-olive btn-xs">修改</button>                  
+		                                 	  <button type="button" ng-click="updateUI(goods.id)" class="btn bg-olive btn-xs">修改</button>
 		                                  </td>
 			                          </tr>
 			                      </tbody>

@@ -1,22 +1,36 @@
  //控制层 
-app.controller('goodsController' ,function($scope,$controller ,itemCatService,typeTemplateService ,goodsService){
+app.controller('goodsController' ,function($scope,$controller,$location ,itemCatService,typeTemplateService ,goodsService){
 	
 	$controller('baseController',{$scope:$scope});//继承
 
-	//初始化初始化对象
-	//$scope.entity = {goods:{},goodsDesc:{itemImages:[]},items:[]};
 	//初始化组合对象
 	$scope.entity={goods:{},goodsDesc: {itemImages: [],specificationItems:[]},items:[]};
 
-    //读取列表数据绑定到表单中  
+	//定义存放所有的商品分类的数组
+	$scope.categoryList = [];
+	//定义状态数组
+	$scope.status = ["未审核","已审核","审核未通过","关闭"];
+
+    //查询所有分类
+	$scope.findCategoryList=function(){
+		itemCatService.findAll().success(
+			function(response){
+				for(let i=0,len=response.length;i<len;i++){
+					$scope.categoryList[response[i].id]=response[i].name;
+				}
+			}			
+		);
+	}
+
+	//读取列表数据绑定到表单中
 	$scope.findAll=function(){
 		goodsService.findAll().success(
 			function(response){
 				$scope.list=response;
-			}			
+			}
 		);
-	}    
-	
+	}
+
 	//分页
 	$scope.findPage=function(page,rows){			
 		goodsService.findPage(page,rows).success(
@@ -28,18 +42,34 @@ app.controller('goodsController' ,function($scope,$controller ,itemCatService,ty
 	}
 	
 	//查询实体 
-	$scope.findOne=function(id){				
+	$scope.findOne=function(){
+		let id = $location.search()["id"];
 		goodsService.findOne(id).success(
 			function(response){
-				$scope.entity= response;					
+				$scope.entity= response;
+				//1.为富文本编辑器赋值
+				editor.html($scope.entity.goodsDesc.introduction);
+				//2. 转换相应的json串为json对象
+				$scope.entity.goodsDesc.specificationItems = JSON.parse($scope.entity.goodsDesc.specificationItems);
+				$scope.entity.goodsDesc.customAttributeItems = JSON.parse($scope.entity.goodsDesc.customAttributeItems);
+				$scope.entity.goodsDesc.itemImages = JSON.parse($scope.entity.goodsDesc.itemImages);
+				console.log($scope.entity.goodsDesc.customAttributeItems);
+
+				let items = $scope.entity.items;
+				for (let i=0,len=items.length;i<len;i++){
+					items[i].spec = JSON.parse(items[i].spec)
+				}
 			}
 		);				
 	}
 	
 	//保存 
-	$scope.save=function(){				
+	$scope.save=function(){
+
+		$scope.entity.goodsDesc.introduction = editor.html();//得到富文本编辑器的内容并为introduction属性赋值
+		console.log($scope.entity.goodsDesc.introduction);
 		var serviceObject;//服务层对象
-		$scope.entity.goodsDesc.introduction=editor.html();//得到富文本编辑器的内容并为introduction属性赋值
+
 		if($scope.entity.id!=null){//如果有ID
 			serviceObject=goodsService.update( $scope.entity ); //修改  
 		}else{
@@ -50,7 +80,7 @@ app.controller('goodsController' ,function($scope,$controller ,itemCatService,ty
 				if(response.success){
 					//重新查询 
 		        	//$scope.reloadList();//重新加载
-					alter("保存成功！");
+					alert("保存成功！");
 					$scope.entity={};
 					editor.html('');//清空富文本编辑器
 				}else{
@@ -207,5 +237,30 @@ app.controller('goodsController' ,function($scope,$controller ,itemCatService,ty
 		}
 		//9.3)返回
 		return itemList;
+	}
+
+	//10.修改商品
+	$scope.updateUI=(id)=>{
+		location.href = "goods_edit.html#?id="+id;
+	}
+
+	//11.根据已知内容判断是否勾选复选框
+	$scope.checkedAttribute=(name,value)=>{
+		//11.1 得到后台查询出的用户选择的所有的规格内容列表
+		let items = $scope.entity.goodsDesc.specificationItems;
+
+		//11.2 查询在此列表中是否存在指定的attributeName中的内容（name)
+		let obj = searchByKey(items,"attributeName",name);
+
+		//11.3 判断查询出的对象是否存在
+		if (obj == null){
+			return false;
+		}else {			//否则，判断正在遍历的规格的值是否在obj.attributeValue这个数组中
+			if (obj.attributeValue.indexOf(value)>=0){
+				return true;
+			}else {
+				return false;
+			}
+		}
 	}
 });	

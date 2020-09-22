@@ -19,6 +19,15 @@
         <module>springSecurityDemo</module>
         <module>springSecurityDemo</module>
         <module>fastDFSDemo</module>
+        <module>springDataRedis</module>
+        <module>zeyigou_portal_web</module>
+        <module>zeyigou_content_interface</module>
+        <module>zeyigou_content_service</module>
+        <module>springDataSolrDemo</module>
+        <module>zeyigou_search_service</module>
+        <module>zeyigou_search_service</module>
+        <module>zeyigou_search_interface</module>
+        <module>zeyigou_search_web</module>
     </modules>
 
 

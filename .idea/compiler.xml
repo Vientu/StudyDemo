@@ -8,12 +8,20 @@
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
         <module name="zeyigou_common" />
+        <module name="zeyigou_sellgoods_service" />
+        <module name="zeyigou_search_web" />
+        <module name="zeyigou_manager_web" />
+        <module name="zeyigou_search_service" />
+        <module name="springDataRedis" />
+        <module name="zeyigou_portal_web" />
+        <module name="zeyigou_search_interface" />
         <module name="springSecurityDemo" />
+        <module name="zeyigou_content_service" />
         <module name="zeyigou_sellgoods_interface" />
         <module name="zeyigou_dao" />
-        <module name="zeyigou_sellgoods_service" />
         <module name="zeyigou_shop_web" />
-        <module name="zeyigou_manager_web" />
+        <module name="springDataSolrDemo" />
+        <module name="zeyigou_content_interface" />
         <module name="fastDFSDemo" />
         <module name="zeyigou_pojo" />
       </profile>

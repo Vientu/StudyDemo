@@ -1,8 +1,24 @@
  //控制层 
-app.controller('goodsController' ,function($scope,$controller   ,goodsService){	
+app.controller('goodsController' ,function($scope,$controller,itemCatService,goodsService){
 	
 	$controller('baseController',{$scope:$scope});//继承
-	
+
+	//定义存放所有的商品分类的数组
+	$scope.categoryList = [];
+	//定义状态数组
+	$scope.status = ["未审核","已审核","审核未通过","关闭"];
+
+	//查询所有分类
+	$scope.findCategoryList=function(){
+		itemCatService.findAll().success(
+			function(response){
+				for(let i=0,len=response.length;i<len;i++){
+					$scope.categoryList[response[i].id]=response[i].name;
+				}
+			}
+		);
+	}
+
     //读取列表数据绑定到表单中  
 	$scope.findAll=function(){
 		goodsService.findAll().success(
@@ -75,6 +91,18 @@ app.controller('goodsController' ,function($scope,$controller   ,goodsService){
 				$scope.paginationConf.totalItems=response.total;//更新总记录数
 			}			
 		);
+	}
+
+	//审核
+	$scope.updateStatus=(status)=>{
+		goodsService.updateStatus(status,$scope.selectIds).success(responce=>{
+			if (responce.success){
+				$scope.findAll();
+			}else {
+				alert(responce.message);
+			}
+		})
+
 	}
     
 });	

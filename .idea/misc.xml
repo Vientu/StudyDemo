@@ -3,7 +3,11 @@
   <component name="ExternalStorageConfigurationManager" enabled="true" />
   <component name="FrameworkDetectionExcludesConfiguration">
     <file type="web" url="file://$PROJECT_DIR$/springSecurityDemo" />
+    <file type="web" url="file://$PROJECT_DIR$/zeyigou_content_service" />
     <file type="web" url="file://$PROJECT_DIR$/zeyigou_manager_web" />
+    <file type="web" url="file://$PROJECT_DIR$/zeyigou_portal_web" />
+    <file type="web" url="file://$PROJECT_DIR$/zeyigou_search_service" />
+    <file type="web" url="file://$PROJECT_DIR$/zeyigou_search_web" />
     <file type="web" url="file://$PROJECT_DIR$/zeyigou_sellgoods_service" />
     <file type="web" url="file://$PROJECT_DIR$/zeyigou_shop_web" />
   </component>
