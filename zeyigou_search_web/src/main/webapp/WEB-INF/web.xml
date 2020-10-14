@@ -17,9 +17,9 @@
     <url-pattern>*.do</url-pattern>
   </servlet-mapping>
   <!--  2.加载监听器-->
-<!--  <listener>-->
-<!--    <listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>-->
-<!--  </listener>-->
+  <listener>
+    <listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
+  </listener>
   <!--  3.配置字节码过滤器-->
   <filter>
     <filter-name>characterEncoding</filter-name>

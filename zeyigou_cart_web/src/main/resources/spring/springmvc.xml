@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:mvc="http://www.springframework.org/schema/mvc"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:dubbo="http://code.alibabatech.com/schema/dubbo"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc.xsd http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd http://code.alibabatech.com/schema/dubbo http://code.alibabatech.com/schema/dubbo/dubbo.xsd">
+
+    <mvc:annotation-driven/>
+
+<!--    1.配置包扫描-->
+    <context:component-scan base-package="com.zeyigou.users.controller"/>
+<!--    2.配置dubbo相关的消费者信息-->
+<!--    2.1 配置dubbo应用者的名字-->
+    <dubbo:application name="zeyigou_users_web"/>
+<!--    2.2 配置注册中心的地址-->
+    <dubbo:registry address="zookeeper://192.16825.129:2181"/>
+<!--    2.3 配置服务暴露的位置（@Reference注解包的位置）-->
+    <dubbo:annotation package="com.zeyigou.users.controller"/>
+</beans>

@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:dubbo="http://code.alibabatech.com/schema/dubbo"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://code.alibabatech.com/schema/dubbo http://code.alibabatech.com/schema/dubbo/dubbo.xsd">
+
+<!--    配置dubbo的相关配置-->
+<!--    1.配置应用服务名-->
+    <dubbo:application name="zeyigou_users_service"/>
+<!--    2.配置为当前的服务分配的端口号，默认为20880，每个服务占用一个-->
+    <dubbo:protocol name="dubbo" port="20885"/>
+<!--    3.配置dubbo的注册中心的地址，其中端口号代表我们客户端访问注册中心得端口号-->
+    <dubbo:registry address="zookeeper://192.16825.129:2181"/>
+<!--    4.配置要扫描的service注解所在报的位置-->
+    <dubbo:annotation package="com.zeyigou.users.service.impl"/>
+</beans>

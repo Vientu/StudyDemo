@@ -225,7 +225,7 @@ public class GoodsServiceImpl implements GoodsService {
 	}
 
 	@Override
-	public void upadteStatus(int status, Long[] ids) {
+	public void upadteStatus(String status, Long[] ids) {
 		for (Long id : ids) {
 			//1.根据主键查询商品
 			TbGoods tbGoods = goodsMapper.selectByPrimaryKey(id);

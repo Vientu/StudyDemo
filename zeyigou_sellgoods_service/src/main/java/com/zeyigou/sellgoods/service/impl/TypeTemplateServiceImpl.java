@@ -11,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import com.alibaba.dubbo.config.annotation.Service;
 import com.github.pagehelper.Page;
 import com.github.pagehelper.PageHelper;
+import org.springframework.data.redis.core.RedisTemplate;
 
 
 /**
@@ -25,13 +26,30 @@ public class TypeTemplateServiceImpl implements TypeTemplateService {
 	private TbTypeTemplateMapper typeTemplateMapper;
 	@Autowired
 	private TbSpecificationOptionMapper optionMapper;
+	@Autowired
+	private RedisTemplate redisTemplate;
 	
 	/**
 	 * 查询全部
 	 */
 	@Override
 	public List<TbTypeTemplate> findAll() {
-		return typeTemplateMapper.selectByExample(null);
+		//1.查询得到模板列表
+		List<TbTypeTemplate> tbTypeTemplates = typeTemplateMapper.selectByExample(null);
+		//2.遍历
+		for (TbTypeTemplate template : tbTypeTemplates) {
+			//2.1 以模板id为key，以specIds规格列表为值放到redis中
+			List<Map> specList = findSpecList(template.getId());
+			redisTemplate.boundHashOps("specList").put(template.getId(),specList);
+
+			//2.2 以模板id为key，以brandIds品牌列表为值放到redis中
+			String brandIds = template.getBrandIds();
+			List<Map> brandList = JSON.parseArray(brandIds,Map.class);
+			redisTemplate.boundHashOps("brandList").put(template.getId(),brandList);
+		}
+		System.out.println("将品牌列表放到缓存中。。。");
+		System.out.println("将规格列表放到缓存中。。。");
+		return tbTypeTemplates;
 	}
 
 	/**

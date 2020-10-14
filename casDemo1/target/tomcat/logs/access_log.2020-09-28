@@ -1,0 +1,9 @@
+0:0:0:0:0:0:0:1 - - [28/Sep/2020:16:34:22 +0800] "GET /logout HTTP/1.1" 302 - http-bio-9001-exec-2 70
+0:0:0:0:0:0:0:1 - - [28/Sep/2020:16:34:22 +0800] "GET /logout?ticket=ST-2-EHh0iYOkZJTh7cLSOTJa-cas01.example.org HTTP/1.1" 302 - http-bio-9001-exec-3 368
+0:0:0:0:0:0:0:1 - - [28/Sep/2020:16:34:22 +0800] "GET /logout HTTP/1.1" 404 963 http-bio-9001-exec-4 16
+127.0.0.1 - - [28/Sep/2020:16:34:27 +0800] "POST / HTTP/1.1" 200 - http-bio-9001-exec-7 9
+127.0.0.1 - - [28/Sep/2020:16:34:27 +0800] "POST /logout HTTP/1.1" 200 - http-bio-9001-exec-6 7
+0:0:0:0:0:0:0:1 - - [28/Sep/2020:16:34:32 +0800] "GET / HTTP/1.1" 302 - http-bio-9001-exec-5 2
+0:0:0:0:0:0:0:1 - - [28/Sep/2020:16:34:42 +0800] "GET /?ticket=ST-3-76tbFMeRL7mfoGGVe6la-cas01.example.org HTTP/1.1" 302 - http-bio-9001-exec-10 36
+0:0:0:0:0:0:0:1 - - [28/Sep/2020:16:34:43 +0800] "GET / HTTP/1.1" 200 116 http-bio-9001-exec-10 1100
+0:0:0:0:0:0:0:1 - - [28/Sep/2020:16:36:18 +0800] "GET / HTTP/1.1" 200 116 http-bio-9001-exec-7 5

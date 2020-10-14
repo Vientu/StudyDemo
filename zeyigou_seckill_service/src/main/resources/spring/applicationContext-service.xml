@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:dobbo="http://code.alibabatech.com/schema/dubbo"
+       xmlns:dubbo="http://code.alibabatech.com/schema/dubbo"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://code.alibabatech.com/schema/dubbo http://code.alibabatech.com/schema/dubbo/dubbo.xsd">
+<!--    1.配置dubbo-->
+<!--    1.1 配置应用程序服务名-->
+    <dobbo:application name="zeyigou_seckill_service"/>
+<!--    1.2 配置为当前服务器分配的端口号，默认为20880，每个服务器占用一个-->
+    <dobbo:protocol name="dubbo" port="20890"/>
+<!--    1.3配置dubbo的注册中心的地址，其中的端口号代表我们客户端访问注册中心的端口号-->
+    <dubbo:registry address="zookeeper://192.168.25.128:2181"/>
+<!--    1.4 配置配置要扫描的service注解所在包位置-->
+    <dubbo:annotation package="com.zeyigou.seckill.service.impl"/>
+
+</beans>

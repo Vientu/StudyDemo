@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">
+
+    <context:component-scan base-package="com.vientu.listener"/>
+<!--    1.定义原始的连接工厂对象-->
+    <bean id="targetConnectionFactory" class="org.apache.activemq.ActiveMQConnectionFactory">
+        <property name="brokerURL" value="tcp://192.168.25.129:61616"/>
+    </bean>
+<!--    2.定义spring包装后的连接工厂对象-->
+    <bean id="connectionFactory" class="org.springframework.jms.connection.SingleConnectionFactory">
+        <property name="targetConnectionFactory" ref="targetConnectionFactory"/>
+    </bean>
+<!--    3.定义点对点的目标对象-->
+    <bean id="springQueue" class="org.apache.activemq.command.ActiveMQQueue">
+        <constructor-arg name="name" value="spring-queue"/>
+    </bean>
+<!--    4.定义默认的消息监听器容器对象[点对点的消息监听器]-->
+    <bean class="org.springframework.jms.listener.DefaultMessageListenerContainer">
+<!--        4.1 引入连接工厂对象-->
+        <property name="connectionFactory" ref="connectionFactory"/>
+<!--        4.2 引入目标对象-->
+        <property name="destination" ref="springQueue"/>
+<!--        4.3 引入监听容器对象-->
+        <property name="messageListener" ref="messageListenerQueue"/>
+    </bean>
+<!--    5.定义[发布/订阅]的目标对象-->
+    <bean id="springTopic" class="org.apache.activemq.command.ActiveMQTopic">
+        <constructor-arg name="name" value="spring-topic"/>
+    </bean>
+<!--    6.定义默认的消息监听器容器对象[发布/订阅的消息监听器]-->
+    <bean class="org.springframework.jms.listener.DefaultMessageListenerContainer">
+<!--        6.1 引入连接工厂对象-->
+        <property name="connectionFactory" ref="connectionFactory"/>
+<!--        6.2 引入目标对象-->
+        <property name="destination" ref="springTopic"/>
+<!--        6.3 引入监听器容器对象-->
+        <property name="messageListener" ref="messageListenerTopic"/>
+    </bean>
+</beans>

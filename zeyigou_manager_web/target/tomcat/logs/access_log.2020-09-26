@@ -1,0 +1,7 @@
+0:0:0:0:0:0:0:1 - - [26/Sep/2020:00:10:14 +0800] "GET /admin/index.html HTTP/1.1" 302 - http-bio-9101-exec-2 240
+0:0:0:0:0:0:0:1 - - [26/Sep/2020:00:10:14 +0800] "GET /login.html HTTP/1.1" 304 - http-bio-9101-exec-3 87
+0:0:0:0:0:0:0:1 - - [26/Sep/2020:00:10:15 +0800] "GET /assets/img/favicon.ico HTTP/1.1" 302 - http-bio-9101-exec-4 5
+0:0:0:0:0:0:0:1 - - [26/Sep/2020:00:10:16 +0800] "POST /login HTTP/1.1" 302 - http-bio-9101-exec-5 44
+0:0:0:0:0:0:0:1 - - [26/Sep/2020:00:10:16 +0800] "GET /admin/index.html HTTP/1.1" 200 22323 http-bio-9101-exec-6 6
+0:0:0:0:0:0:0:1 - - [26/Sep/2020:00:10:17 +0800] "GET /admin/home.html HTTP/1.1" 200 4468 http-bio-9101-exec-7 37
+0:0:0:0:0:0:0:1 - - [26/Sep/2020:00:10:34 +0800] "GET /index/getName.do HTTP/1.1" 200 15 http-bio-9101-exec-8 16687

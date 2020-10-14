@@ -26,7 +26,7 @@
     <!--    4.1 配置dubbo应用的名字-->
     <dubbo:application name="zeyigou_portal_web"/>
     <!--    4.2 配置注册中心的地址-->
-    <dubbo:registry address="zookeeper://192.168.25.128:2181"/>
+    <dubbo:registry address="192.168.25.130:2181,192.168.25.130:2182,192.168.25.130:2183" protocol="zookeeper"/>
     <!--    4.3 配置@Reference注解所在包位置-->
     <dubbo:annotation package="com.zeyigou.portal.controller"/>
 

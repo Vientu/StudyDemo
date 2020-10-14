@@ -28,6 +28,31 @@
         <module>zeyigou_search_service</module>
         <module>zeyigou_search_interface</module>
         <module>zeyigou_search_web</module>
+        <module>freemarkerDome</module>
+        <module>zeyigou_page_interface</module>
+        <module>zeyigou_page_service</module>
+        <module>jmsDemo</module>
+        <module>springJmsProducer</module>
+        <module>springJmsConsumer</module>
+        <module>casDemo1</module>
+        <module>casDemo2</module>
+        <module>casDemo3</module>
+        <module>springbootJms</module>
+        <module>zeyigou_user_interface</module>
+        <module>zeyigou_user_web</module>
+        <module>zeyigou_users_service</module>
+        <module>zeyigou_cart_interface</module>
+        <module>zeyigou_cart_service</module>
+        <module>zeyigou_cart_web</module>
+        <module>zeyigou_order_interface</module>
+        <module>zeyigou_order_service</module>
+        <module>zeyigou_pay_interface</module>
+        <module>zeyigou_pay_service</module>
+        <module>zeyigou_seckill_interface</module>
+        <module>zeyigou_seckill_service</module>
+        <module>zeyigou_seckill_web</module>
+        <module>zeyigou_page_web</module>
+        <module>springtaskDemo</module>
     </modules>
 
 
